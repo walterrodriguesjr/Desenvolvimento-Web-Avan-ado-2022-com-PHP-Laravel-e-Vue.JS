@@ -13,7 +13,8 @@
         <option value="">Qual o motivo do contato?</option>
         {{-- neste caso, se 'motivo_contato' for igual ao value referido, mantem, se não, fica em branco --}}
         @foreach ($motivo_contatos as $key => $motivo_contato)
-            <option value="{{ $motivo_contato->id }}" {{ old('motivo_contatos_id') == $motivo_contato->id ? 'selected' : '' }}>
+            <option value="{{ $motivo_contato->id }}"
+                {{ old('motivo_contatos_id') == $motivo_contato->id ? 'selected' : '' }}>
                 {{ $motivo_contato->motivo_contato }}</option>
         @endforeach
     </select>
@@ -24,8 +25,13 @@
     <button type="submit" class="{{ $classe }}">ENVIAR</button>
 </form>
 
-<div style="position:absolute; top:0px; width:100%; background:red">
-    <pre>
-                    {{ print_r($errors) }}
-                    </pre>
-</div>
+{{-- ESTA CONDICIONAL UTILIZA O MÉTODO 'any' para que, somente a mensagem de erro seja mostrada, caso a variável '$errors'
+POSSUA ALGUM ERRO DE VALIDAÇÃO NO FORM --}}
+@if ($errors->any())
+    <div style="position:absolute; top:0px; left:0px; width:100%; background:red">
+        @foreach ($errors->all() as $erro)
+            {{ $erro }}
+            <br>
+        @endforeach
+    </div>
+@endif
