@@ -2,13 +2,19 @@
 <form action={{ route('site.contato') }} method="post">
     @csrf
     <input name="nome" value="{{ old('nome') }}" type="text" placeholder="Nome" class="{{ $classe }}">
+    {{-- ESTA CONDICIONAL VERIFICA SE, A VARIÁVEL '$errors', utilizando o método 'has()', que contém o name do input
+    em questão, contém algum erro, se sim, a variável em questão é mostrada, utilizando o método 'first()' que 
+    irá exibir sempre o primeiro erro relacionado ao 'name' do input em questão --}}
+    {{-- CONDICIONAL REPLICADA NOS DEMAIS INPUTS --}}
+    {{ $errors->has('nome') ? $errors->first('nome') : '' }}
     <br>
     <input name="telefone" value="{{ old('telefone') }}" type="text" placeholder="Telefone"
         class="{{ $classe }}">
+    {{ $errors->has('telefone') ? $errors->first('telefone') : '' }}
     <br>
     <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="{{ $classe }}">
+    {{ $errors->has('email') ? $errors->first('email') : '' }}
     <br>
-
     <select name="motivo_contatos_id" class="{{ $classe }}">
         <option value="">Qual o motivo do contato?</option>
         {{-- neste caso, se 'motivo_contato' for igual ao value referido, mantem, se não, fica em branco --}}
@@ -18,9 +24,11 @@
                 {{ $motivo_contato->motivo_contato }}</option>
         @endforeach
     </select>
+    {{ $errors->has('motivo_contatos_id') ? $errors->first('motivo_contatos_id') : '' }}
     <br>
     <textarea name="mensagem"
         class="{{ $classe }}">{{ old('mensagem') != '' ? old('mensagem') : 'Preencha aqui a sua mensagem' }}</textarea>
+    {{ $errors->has('mensagem') ? $errors->first('mensagem') : '' }}
     <br>
     <button type="submit" class="{{ $classe }}">ENVIAR</button>
 </form>
