@@ -46,7 +46,13 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     /* ROTAS DE AÇÕES PARA A AREA DE PRODUTOS */
     /* foi utilizado o método 'resource' que cria automaticamente, todas as demais rotas padrão, não sendo
     necessário criar todas as rotas na mão, como em Fornecedor */
+    /* produto */
     Route::resource('produto', 'ProdutoController');
+
+    /* foi utilizado o método 'resource' que cria automaticamente, todas as demais rotas padrão, não sendo
+    necessário criar todas as rotas na mão, como em Fornecedor */
+    /* produto detalhes */
+    Route::resource('produto-detalhe', 'ProdutoDetalheController');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('site.teste');

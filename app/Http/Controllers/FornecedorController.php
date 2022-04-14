@@ -13,11 +13,11 @@ class FornecedorController extends Controller
 
     public function listar(Request $request){
         /* função listar realiza uma query que faz a busca no banco por cada coluna e name */
-        $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
+        $fornecedores = Fornecedor::with(['produtos'])->where('nome', 'like', '%'.$request->input('nome').'%')
             ->where('site', 'like', '%'.$request->input('site').'%')
             ->where('uf', 'like', '%'.$request->input('uf').'%')
             ->where('email', 'like', '%'.$request->input('email').'%')
-            ->paginate(2);
+            ->paginate(5);
 
             /* dd($fornecedores); */
             /* a variável $fonecedores contendo todos os dados da query, é inserido como parâmetro no return da view */
