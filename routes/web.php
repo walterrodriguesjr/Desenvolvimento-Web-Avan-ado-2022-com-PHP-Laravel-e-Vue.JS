@@ -31,7 +31,6 @@ Route::post('/login', 'LoginController@autenticar')->name('site.login');
 Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(function () {
     Route::get('/home', 'HomeController@index')->name('app.home');
     Route::get('/sair', 'LoginController@sair')->name('app.sair');
-    Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
 
     /* ROTAS DE AÇÕES PARA A AREA DE FORNECEDOR */
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
@@ -53,6 +52,13 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     necessário criar todas as rotas na mão, como em Fornecedor */
     /* produto detalhes */
     Route::resource('produto-detalhe', 'ProdutoDetalheController');
+
+    /* foi utilizado o método 'resource' que cria automaticamente, todas as demais rotas padrão, não sendo
+    necessário criar todas as rotas na mão, como em Fornecedor */
+    /* produto detalhes */
+    Route::resource('cliente', 'ClienteController');
+    Route::resource('pedido', 'PedidoController');
+    Route::resource('pedido-produto', 'PedidoProdutoController');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('site.teste');
