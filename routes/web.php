@@ -58,7 +58,9 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     /* produto detalhes */
     Route::resource('cliente', 'ClienteController');
     Route::resource('pedido', 'PedidoController');
-    Route::resource('pedido-produto', 'PedidoProdutoController');
+    /* Route::resource('pedido-produto', 'PedidoProdutoController'); */
+    Route::get('pedido-produto/create/{pedido}', 'PedidoProdutoController@create')->name('pedido-produto.create');
+    Route::post('pedido-produto/store/{pedido}', 'PedidoProdutoController@store')->name('pedido-produto.store');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('site.teste');
